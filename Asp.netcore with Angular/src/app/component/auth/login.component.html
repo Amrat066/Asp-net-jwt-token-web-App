@@ -1,0 +1,33 @@
+<div class="auth-card">
+  <h2 class="mb-3 text-center">Welcome Back</h2>
+  <p class="text-muted text-center mb-4">Sign in to manage products</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="you@example.com">
+      <div class="text-danger small" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+        A valid email is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="••••••••">
+      <div class="text-danger small" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+        Password is required.
+      </div>
+    </div>
+
+    <div class="text-danger mb-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <button class="btn btn-primary w-100" type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Signing in...' : 'Sign In' }}
+    </button>
+  </form>
+
+  <div class="text-center mt-3">
+    <span class="text-muted">New here?</span>
+    <a routerLink="/register">Create an account</a>
+  </div>
+</div>
