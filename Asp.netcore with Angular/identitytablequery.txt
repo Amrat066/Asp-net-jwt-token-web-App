@@ -86,3 +86,9 @@ CREATE TABLE [dbo].[Product]
     [Status] BIT NULL
 );
 
+Package:
+Microsoft.AspNetCore.Identity.EntityFrameworkCore(8.0.8)
+Microsoft.EntityFrameworkCore(8.0.22)
+Microsoft.EntityFrameworkCore.Design(8.0.22)
+Microsoft.EntityFrameworkCore.sqlserver(8.0.22)
+Microsoft.EntityFrameworkCore.Tools(8.0.22)
