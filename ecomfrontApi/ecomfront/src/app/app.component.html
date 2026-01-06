@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">Ecom Front</a>
+
+    <div class="collapse navbar-collapse show">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/itemMaster" routerLinkActive="active">Products</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <ng-container *ngIf="!isLoggedIn; else loggedIn">
+          <a class="btn btn-light btn-sm" routerLink="/login">Login</a>
+          <a class="btn btn-outline-light btn-sm" routerLink="/register">Register</a>
+        </ng-container>
+        <ng-template #loggedIn>
+          <span class="text-white small">{{ userEmail }}</span>
+          <button class="btn btn-light btn-sm" (click)="logout()">Logout</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <router-outlet></router-outlet>
+</main>
