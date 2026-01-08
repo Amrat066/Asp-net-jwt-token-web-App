@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp.netcore with Angular", "Asp.netcore with Angular.csproj", "{2007988E-71AE-4E4F-9D1E-0538EBC8930E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2007988E-71AE-4E4F-9D1E-0538EBC8930E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2007988E-71AE-4E4F-9D1E-0538EBC8930E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2007988E-71AE-4E4F-9D1E-0538EBC8930E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2007988E-71AE-4E4F-9D1E-0538EBC8930E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB4FD89D-4D11-498C-A77A-C9B310BB02AF}
+	EndGlobalSection
+EndGlobal

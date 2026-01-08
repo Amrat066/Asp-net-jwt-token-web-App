@@ -1,0 +1,96 @@
+-- Roles
+CREATE TABLE [dbo].[AspNetRoles](
+    [Id] NVARCHAR(450) NOT NULL PRIMARY KEY,
+    [Name] NVARCHAR(256) NULL,
+    [NormalizedName] NVARCHAR(256) NULL,
+    [ConcurrencyStamp] NVARCHAR(MAX) NULL
+);
+CREATE UNIQUE INDEX IX_AspNetRoles_NormalizedName ON [dbo].[AspNetRoles]([NormalizedName]) WHERE [NormalizedName] IS NOT NULL;
+
+-- Users
+CREATE TABLE [dbo].[AspNetUsers](
+    [Id] NVARCHAR(450) NOT NULL PRIMARY KEY,
+    [UserName] NVARCHAR(256) NULL,
+    [NormalizedUserName] NVARCHAR(256) NULL,
+    [Email] NVARCHAR(256) NULL,
+    [NormalizedEmail] NVARCHAR(256) NULL,
+    [EmailConfirmed] BIT NOT NULL DEFAULT(0),
+    [PasswordHash] NVARCHAR(MAX) NULL,
+    [SecurityStamp] NVARCHAR(MAX) NULL,
+    [ConcurrencyStamp] NVARCHAR(MAX) NULL,
+    [PhoneNumber] NVARCHAR(MAX) NULL,
+    [PhoneNumberConfirmed] BIT NOT NULL DEFAULT(0),
+    [TwoFactorEnabled] BIT NOT NULL DEFAULT(0),
+    [LockoutEnd] DATETIMEOFFSET NULL,
+    [LockoutEnabled] BIT NOT NULL DEFAULT(0),
+    [AccessFailedCount] INT NOT NULL DEFAULT(0)
+);
+CREATE UNIQUE INDEX IX_AspNetUsers_NormalizedUserName ON [dbo].[AspNetUsers]([NormalizedUserName]) WHERE [NormalizedUserName] IS NOT NULL;
+CREATE INDEX IX_AspNetUsers_NormalizedEmail ON [dbo].[AspNetUsers]([NormalizedEmail]);
+
+-- UserRoles (many-to-many)
+CREATE TABLE [dbo].[AspNetUserRoles](
+    [UserId] NVARCHAR(450) NOT NULL,
+    [RoleId] NVARCHAR(450) NOT NULL,
+    CONSTRAINT PK_AspNetUserRoles PRIMARY KEY ([UserId],[RoleId]),
+    CONSTRAINT FK_UserRoles_User FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers]([Id]) ON DELETE CASCADE,
+    CONSTRAINT FK_UserRoles_Role FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles]([Id]) ON DELETE CASCADE
+);
+
+-- UserClaims
+CREATE TABLE [dbo].[AspNetUserClaims](
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [UserId] NVARCHAR(450) NOT NULL,
+    [ClaimType] NVARCHAR(MAX) NULL,
+    [ClaimValue] NVARCHAR(MAX) NULL,
+    CONSTRAINT FK_UserClaims_User FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers]([Id]) ON DELETE CASCADE
+);
+
+-- RoleClaims
+CREATE TABLE [dbo].[AspNetRoleClaims](
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [RoleId] NVARCHAR(450) NOT NULL,
+    [ClaimType] NVARCHAR(MAX) NULL,
+    [ClaimValue] NVARCHAR(MAX) NULL,
+    CONSTRAINT FK_RoleClaims_Role FOREIGN KEY ([RoleId]) REFERENCES [dbo].[AspNetRoles]([Id]) ON DELETE CASCADE
+);
+
+-- UserLogins (external providers)
+CREATE TABLE [dbo].[AspNetUserLogins](
+    [LoginProvider] NVARCHAR(450) NOT NULL,
+    [ProviderKey] NVARCHAR(450) NOT NULL,
+    [ProviderDisplayName] NVARCHAR(MAX) NULL,
+    [UserId] NVARCHAR(450) NOT NULL,
+    CONSTRAINT PK_AspNetUserLogins PRIMARY KEY ([LoginProvider],[ProviderKey]),
+    CONSTRAINT FK_UserLogins_User FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers]([Id]) ON DELETE CASCADE
+);
+
+-- UserTokens
+CREATE TABLE [dbo].[AspNetUserTokens](
+    [UserId] NVARCHAR(450) NOT NULL,
+    [LoginProvider] NVARCHAR(450) NOT NULL,
+    [Name] NVARCHAR(450) NOT NULL,
+    [Value] NVARCHAR(MAX) NULL,
+    CONSTRAINT PK_AspNetUserTokens PRIMARY KEY ([UserId],[LoginProvider],[Name]),
+    CONSTRAINT FK_UserTokens_User FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers]([Id]) ON DELETE CASCADE
+);
+
+
+CREATE TABLE [dbo].[Product]
+(
+    [Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    [ProductName] NVARCHAR(50) NULL,
+    [Price] INT NULL,
+    [Description] NVARCHAR(50) NULL,
+    [Rating] INT NULL,
+    [Status] BIT NULL
+);
+
+
+Package:
+Microsoft.AspNetCore.Authentication.JwtBearer(8.0.8)
+Microsoft.AspNetCore.Identity.EntityFrameworkCore(8.0.8)
+Microsoft.EntityFrameworkCore(8.0.22)
+Microsoft.EntityFrameworkCore.Design(8.0.22)
+Microsoft.EntityFrameworkCore.sqlserver(8.0.22)
+Microsoft.EntityFrameworkCore.Tools(8.0.22)
