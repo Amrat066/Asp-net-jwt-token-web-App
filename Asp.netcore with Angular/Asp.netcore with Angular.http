@@ -1,6 +1,0 @@
-@Asp.netcore_with_Angular_HostAddress = http://localhost:5181
-
-GET {{Asp.netcore_with_Angular_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
